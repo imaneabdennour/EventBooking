@@ -1,4 +1,5 @@
 public class CaseBeforeUpdateTriggerHandler {
+    @future (callout=true)  
     public static void sendEmail(Set<Id> caseIds){
         //Boolean requestSentToExternalSystem = false;
         //Integer i=0;
