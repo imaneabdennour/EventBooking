@@ -3,7 +3,7 @@ public  class ExternalSystemService {
     private String webServiceURL;
 
     public ExternalSystemService(){
-        this.webServiceURL = 'https://th-apex-http-callout.herokuapp.com/animals';
+        this.webServiceURL = 'callout:animalsEndpoint';
     }
 
     public void registerAttendees(Case r){
@@ -19,6 +19,7 @@ public  class ExternalSystemService {
                     HttpResponse response = http.send(request);
                     // Parse the JSON response
                     if (response.getStatusCode() != 201) {
+                        r.addError('Error in post method');
                         System.debug('The status code returned was not expected: ' +
                             response.getStatusCode() + ' ' + response.getStatus());
                     } else {
