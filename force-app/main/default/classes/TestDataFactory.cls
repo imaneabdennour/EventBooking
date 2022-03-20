@@ -11,6 +11,4 @@ public abstract class TestDataFactory {
         insert contacts;
         return acc;
     }
-
-
 }

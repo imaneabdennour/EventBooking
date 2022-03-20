@@ -33,12 +33,25 @@ public  class ExternalSystemService {
 
     public void notifyAttendeeByEmail(Contact account){
       
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new String[] {c.email}; 
+        mail.setToAddresses(toAddresses);
+        mail.setReplyTo('support@eventBooking.com');
+        mail.setSenderDisplayName('Event Booking support');
+
         Task tk = new Task();
         tk.Subject = 'Send Email To' + account.name;
         tk.Status = 'Open';
         tk.Priority = 'Normal';
         tk.WhatId = account.ID;
         insert tk;
+
+        mail.setSubject('New Task Created');
+        mail.setPlainTextBody('Your Task: ' + tk.Id +' has been created.');
+
+        mail.setHtmlBody('Your task:<b> ' + tk.Id +' </b>has been created.<p>');
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+
     } 
 
 
